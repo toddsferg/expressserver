@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-
-  <ul> <% for (var key in urls) { %>
-        <li> <%= urls[key] %> : <%= [key] %> </li>
+<h1>URL SHortener</h1>
+  <ul> <% for (var key in urlDatabase) { %>
+        <li> Shortkey: <%= key %> </li>
             <% } %>
         <li><a href="#">URL shortener here </a></li>
     </ul>
