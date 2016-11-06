@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
-<h1>URL SHortener</h1>
-  <ul> <% for (var key in urlDatabase) { %>
-        <li> Shortkey: <%= key %> </li>
-            <% } %>
-        <li><a href="#">URL shortener here </a></li>
-    </ul>
-</body>
+  <head>
+    <title>UR-EL Shorto</title>
+  </head>
+  <body>
+    <header>
+      <% include ./partials/_header %>
+      <a href="/urls">Short URL's</a>
+    </header>
+    <h2><%= shortURL %></h2>
+    <form method="POST" action="/urls/<%= shortURL%>">
+      <input type="text" name="longURL" value="<%=longURL%>">
+      <input type="submit" value="Edit">
+      <a href="/urls" class="btn btn-lrg btn-primary">Back to URLs</a>
+    </form>
+  </body>
 </html>

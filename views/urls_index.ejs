@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
-
-  <ul> <% for (var key in urls) { %>
-        <li> <%= urls[key] %> : <%= [key] %> </li>
-            <% } %>
-        <li><a href="#">URL shortener here </a></li>
+<head>
+  <title>Littler</title>
+</head>
+  <body>
+    <header>
+      <% include ./partials/_header %>
+      <a href="/">Back to Home</a>
+    </header>
+    <a href="/urls/new">Shorten URL</a>
+    <ul>
+      <% for(var key in urls) { %>
+        <li>
+          <a href="/urls/<%=key%>"><%= key %></a>
+          <a href="<%= urls[key] %>"><%= urls[key] %></a>
+          <form method="POST" action="/urls/<%= key %>/delete">
+            <input type="submit" value="Delete">
+          </form>
+        </li>
+      <% }; %>
     </ul>
-</body>
+  </body>
 </html>
