@@ -9,7 +9,7 @@ app.set("view engine", "ejs"); //templates for ejs
 app.use(bodyParser.urlencoded({
   extended: false
 })); //reads req body
- app.use(cookieParser());
+app.use(cookieParser());
 
 
 const urlDatabase = {
@@ -20,10 +20,10 @@ const urlDatabase = {
 
 // get home page
 app.get("/", (req, res) => {
-   let templateVars = {
+  let templateVars = {
     username: req.cookies.username,
-     };
-     console.log(templateVars.username);
+  };
+  //console.log(templateVars.username);
   res.render("home", templateVars);
 });
 
@@ -43,7 +43,7 @@ app.get("/urls", (req, res) => {
 
 //post info to /urls
 app.post("/urls", (req, res) => {
-  console.log(req.body.longURL);
+  //console.log(req.body.longURL);
   let shortURL = generateRandomString();
   urlDatabase[shortURL] = req.body.longURL;
   res.redirect("/urls/" + shortURL);
@@ -84,6 +84,7 @@ app.get("/u/:id", (req, res) => {
   let longURL = urlDatabase[req.params.id];
   res.redirect(longURL);
 });
+
 //delete using delete operator
 app.post("/urls/:id/delete", (req, res) => {
   delete urlDatabase[req.params.id];
@@ -93,13 +94,13 @@ app.post("/urls/:id/delete", (req, res) => {
 
 //accept a POST to /login
 app.post("/login", (req, res) => {
-  console.log("logged in a username")
+  //console.log("logged in a username")
   res.cookie("username", req.body.username);
   res.redirect("/");
 })
 //post to /logout, redirect home
 app.post("/logout", (req, res) => {
-  console.log("logged out")
+  //console.log("logged out")
   res.clearCookie("username");
   res.redirect("/");
 })
@@ -107,11 +108,11 @@ app.post("/logout", (req, res) => {
 //generate shortURL
 
 function generateRandomString() {
-   var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var output = "";
-for (var i = 0; i < 6; i++) {
-   output += characters.charAt(Math.floor(Math.random() * characters.length))
-} return output;
+  for (var i = 0; i < 6; i++) {
+    output += characters.charAt(Math.floor(Math.random() * characters.length))
+  } return output;
 };
 
 
